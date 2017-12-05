@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render AddExpensePage correctly 1`] = `
+<div>
+  From Add Expense Page.
+  <ExpenseForm
+    handleExpenseForm={[Function]}
+  />
+</div>
+`;

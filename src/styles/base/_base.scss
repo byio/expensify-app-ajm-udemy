@@ -1,0 +1,20 @@
+html {
+  font-size: 62.5%; // so that 1 rem = 10 px (easier to work with)
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: $m-size;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.is-active {
+  font-weight: bold;
+}
