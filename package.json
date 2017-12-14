@@ -9,9 +9,9 @@
     "dev-server": "webpack-dev-server",
     "build-babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch",
     "build--babel-playground": "babel src/playground --out-dir public/scripts --presets=env,react --watch",
-    "test": "jest --config=jest.config.json",
-    "test:w": "jest --config=jest.config.json --watch",
-    "test:cov": "jest --config=jest.config.json --coverage",
+    "test": "cross-env NODE_ENV=test jest --config=jest.config.json",
+    "test:w": "cross-env NODE_ENV=test jest --config=jest.config.json --watch",
+    "test:cov": "cross-env NODE_ENV=test jest --config=jest.config.json --coverage",
     "start": "node server/server.js",
     "heroku-postbuild": "yarn run build:prod"
   },
@@ -50,6 +50,8 @@
     "webpack": "^3.8.1"
   },
   "devDependencies": {
+    "cross-env": "^5.1.1",
+    "dotenv": "^4.0.0",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.0",
     "enzyme-to-json": "^3.2.2",

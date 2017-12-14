@@ -1,12 +1,12 @@
 import * as firebase from 'firebase';
 
 const config = {
-  apiKey: "AIzaSyCkALhGG5ewtxjmffcZOERmapCHc0LR3JA",
-  authDomain: "expensify-73adf.firebaseapp.com",
-  databaseURL: "https://expensify-73adf.firebaseio.com",
-  projectId: "expensify-73adf",
-  storageBucket: "expensify-73adf.appspot.com",
-  messagingSenderId: "913075645163"
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.FIREBASE_DATABASE_URL,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID
 };
 
 firebase.initializeApp(config);
@@ -14,6 +14,12 @@ firebase.initializeApp(config);
 const db = firebase.database();
 
 export { firebase, db as default};
+
+
+
+
+
+// NOTES BELOW
 
 // // setup subscription to ANY cahnges to expenses data on firebase db
 // db.ref('expenses')
