@@ -5,6 +5,7 @@ import {
   startAddExpense,
   addExpense,
   editExpense,
+  startEditExpense,
   removeExpense,
   startRemoveExpense,
   setExpenses,
@@ -65,6 +66,27 @@ test('should setup edit expense action object', () => {
       note: 'new note value'
     }
   });
+});
+
+test('should update expense on firebase based on updates data', (done) => {
+  const store = createMockStore({});
+  const targetId = expenses[2].id;
+  const updates = {
+    note: 'this note is an update to test startEditExpense.'
+  };
+  store.dispatch(startEditExpense(targetId, updates))
+       .then(() => {
+         const actions = store.getActions();
+         expect(actions[0]).toEqual({
+           type: 'EDIT_EXPENSE',
+           id: targetId,
+           updates
+         });
+         return db.ref(`expenses/${targetId}`).once('value');
+       }).then((snapshot) => {
+         expect(snapshot.val().note).toBe(updates.note);
+         done();
+       });
 });
 
 // test cases: addExpense (only passes expense data into action object; no longer deals with default values)

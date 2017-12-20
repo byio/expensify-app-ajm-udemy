@@ -1,6 +1,8 @@
 import uuid from 'uuid';
 import db from '../firebase/firebase';
 
+
+// ADD_EXPENSE
 export const addExpense = (expense) => ({
   type: 'ADD_EXPENSE',
   expense
@@ -25,9 +27,8 @@ export const startAddExpense = (expenseData = {}) => {
   };
 };
 
-export const removeExpense = ({
-  id
-} = {}) => ({
+// REMOVE_EXPENSE
+export const removeExpense = ({ id } = {}) => ({
   type: 'REMOVE_EXPENSE',
   id
 });
@@ -42,11 +43,20 @@ export const startRemoveExpense = ({ id } = {}) => {
   };
 };
 
+// EDIT_EXPENSE
 export const editExpense = (id, updates) => ({
   type: 'EDIT_EXPENSE',
   id,
   updates
 });
+
+export const startEditExpense = (id, updates) => {
+  return (dispatch) => {
+    return db.ref(`expenses/${id}`).update(updates).then(() => {
+      dispatch(editExpense(id, updates));
+    });
+  };
+};
 
 // SET_EXPENSES (set the array value that we get back from firebase)
 export const setExpenses = (expenses) => ({
