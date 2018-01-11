@@ -14,6 +14,8 @@ import expenses from '../fixtures/expenses';
 import db from '../../firebase/firebase';
 
 // declaring a function that allows the test cases below to create the same mock store
+const uid = 'thisismyrandomtestuid';
+const defaultAuthState = { auth: { uid } };
 const createMockStore = configureMockStore([thunk]);
 
 // write data to firebase before each test(); the done method is used because setting data to firebase is async
@@ -22,7 +24,7 @@ beforeEach((done) => {
   expenses.forEach(({ id, description, note, amount, createdAt }) => {
     expensesData[id] = { description, note, amount, createdAt };
   });
-  db.ref('expenses').set(expensesData).then(() => {
+  db.ref(`users/${uid}/expenses`).set(expensesData).then(() => {
     done();
   });
 });
@@ -37,7 +39,7 @@ test('should setup remove expense action object', () => {
 });
 
 test('should remove expense from firebase', (done) => {
-  const store = createMockStore({});
+  const store = createMockStore(defaultAuthState);
   const targetId = expenses[2].id;
   store.dispatch(startRemoveExpense({ id: targetId }))
        .then(() => {
@@ -48,7 +50,7 @@ test('should remove expense from firebase', (done) => {
            id: targetId
          });
          // fetch from db and check that null is returned
-         return db.ref(`expenses/${targetId}`).once('value');
+         return db.ref(`users/${uid}/expenses/${targetId}`).once('value');
        }).then((snapshot) => {
          // assert that the returned value is null
          expect(snapshot.val()).toBeFalsy();
@@ -69,7 +71,7 @@ test('should setup edit expense action object', () => {
 });
 
 test('should update expense on firebase based on updates data', (done) => {
-  const store = createMockStore({});
+  const store = createMockStore(defaultAuthState);
   const targetId = expenses[2].id;
   const updates = {
     note: 'this note is an update to test startEditExpense.'
@@ -82,7 +84,7 @@ test('should update expense on firebase based on updates data', (done) => {
            id: targetId,
            updates
          });
-         return db.ref(`expenses/${targetId}`).once('value');
+         return db.ref(`users/${uid}/expenses/${targetId}`).once('value');
        }).then((snapshot) => {
          expect(snapshot.val().note).toBe(updates.note);
          done();
@@ -100,7 +102,7 @@ test('should setup add expense action object with values provided', () => {
 
 // test cases: startAddExpense (should add expense to database and store)
 test('should add expense to database and store', (done) => { //done is passed in as an arg so jest knows this is async
-  const store = createMockStore({}); // creating a mock store
+  const store = createMockStore(defaultAuthState); // creating a mock store
   const expenseData = { // dummy expense data to be passed into startAddExpense
     description: 'mouse',
     amount: 3000,
@@ -118,7 +120,7 @@ test('should add expense to database and store', (done) => { //done is passed in
       }
     });
     // test that expense data is added to database
-    return db.ref(`expenses/${actions[0].expense.id}`).once('value'); // returns a promise to be used for promise chaining
+    return db.ref(`users/${uid}/expenses/${actions[0].expense.id}`).once('value'); // returns a promise to be used for promise chaining
   }).then((snapshot) => { // this is the success case for the returned promise above
     expect(snapshot.val()).toEqual(expenseData);
     done();
@@ -128,7 +130,7 @@ test('should add expense to database and store', (done) => { //done is passed in
 
 // test cases: startAddExpense (should add expense with defaults to database and store)
 test('should add expense with defaults to database and store', (done) => {
-  const store = createMockStore({});
+  const store = createMockStore(defaultAuthState);
   const defaults = {
     description: '',
     note: '',
@@ -147,7 +149,7 @@ test('should add expense with defaults to database and store', (done) => {
       }
     });
     // assert/test that default expense data is added to database (fetch the db)
-    return db.ref(`expenses/${actions[0].expense.id}`).once('value');
+    return db.ref(`users/${uid}/expenses/${actions[0].expense.id}`).once('value');
   }).then((snapshot) => {
     expect(snapshot.val()).toEqual(defaults);
     done();
@@ -165,7 +167,7 @@ test('should setup set expenses action object with data (expenses)', () => {
 
 // test case: startSetExpenses
 test('should fetch expenses from firebase', (done) => {
-  const store = createMockStore();
+  const store = createMockStore(defaultAuthState);
   store.dispatch(startSetExpenses()).then(() => {
     const actions = store.getActions();
     expect(actions[0]).toEqual({
