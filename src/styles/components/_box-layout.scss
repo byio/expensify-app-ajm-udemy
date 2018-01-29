@@ -1,0 +1,32 @@
+/*
+  partials in scss will be prefixed with an underscore
+  this underscore will not be used when importing them in other files
+  on that note, the .scss extension will be excluded when importing them as well
+*/
+
+/*
+  this box-layout refers to a UI layout comprised of a full screen background and a small box in the middle
+*/
+
+.box-layout {
+  background: url('/images/bg.jpg');
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.box-layout__box {
+  background: fade-out(white, .15);
+  border-radius: 3px;
+  padding: $l-size $m-size;
+  text-align: center;
+  width: 25rem;
+}
+
+.box-layout__title {
+  margin: 0 0 $m-size 0;
+  line-height: 1;
+}

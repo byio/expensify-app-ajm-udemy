@@ -1,43 +1,112 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render expenses summary corectly with zero expneses 1`] = `
-<div>
-  <p>
-    Viewing 
-    0
-     
-    expenses
-     totalling 
-    $0.00
-    .
-  </p>
+<div
+  className="page-header"
+>
+  <div
+    className="content-container"
+  >
+    <p
+      className="page-header__title"
+    >
+      Viewing 
+      <span>
+        0
+      </span>
+       
+      expenses
+       totalling 
+      <span>
+        $0.00
+      </span>
+      .
+    </p>
+    <div
+      className="page-header__actions"
+    >
+      <Link
+        className="button"
+        replace={false}
+        to="/create"
+      >
+        Add Expense
+      </Link>
+    </div>
+  </div>
 </div>
 `;
 
 exports[`should render expenses summary correctly with 1 expense 1`] = `
-<div>
-  <p>
-    Viewing 
-    1
-     
-    expense
-     totalling 
-    $1.97
-    .
-  </p>
+<div
+  className="page-header"
+>
+  <div
+    className="content-container"
+  >
+    <p
+      className="page-header__title"
+    >
+      Viewing 
+      <span>
+        1
+      </span>
+       
+      expense
+       totalling 
+      <span>
+        $1.97
+      </span>
+      .
+    </p>
+    <div
+      className="page-header__actions"
+    >
+      <Link
+        className="button"
+        replace={false}
+        to="/create"
+      >
+        Add Expense
+      </Link>
+    </div>
+  </div>
 </div>
 `;
 
 exports[`should render expenses summary correctly with multiple expenses 1`] = `
-<div>
-  <p>
-    Viewing 
-    23
-     
-    expenses
-     totalling 
-    $1,567.95
-    .
-  </p>
+<div
+  className="page-header"
+>
+  <div
+    className="content-container"
+  >
+    <p
+      className="page-header__title"
+    >
+      Viewing 
+      <span>
+        23
+      </span>
+       
+      expenses
+       totalling 
+      <span>
+        $1,567.95
+      </span>
+      .
+    </p>
+    <div
+      className="page-header__actions"
+    >
+      <Link
+        className="button"
+        replace={false}
+        to="/create"
+      >
+        Add Expense
+      </Link>
+    </div>
+  </div>
 </div>
 `;

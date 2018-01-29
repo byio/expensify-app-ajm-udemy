@@ -1,0 +1,21 @@
+.button {
+  background: $blue;
+  color: $off-white;
+  border: none;
+  padding: $s-size;
+  font-weight: 300;
+  font-size: $font-size-large;
+  display: inline-block;
+  text-decoration: none;
+  line-height: 1;
+}
+
+// modifier
+.button--link {
+  background: none;
+  text-decoration: none;
+}
+
+.button--secondary {
+  background: #888;
+}

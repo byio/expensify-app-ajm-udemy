@@ -2,9 +2,25 @@
 
 exports[`should render AddExpensePage correctly 1`] = `
 <div>
-  From Add Expense Page.
-  <ExpenseForm
-    handleExpenseForm={[Function]}
-  />
+  <div
+    className="page-header"
+  >
+    <div
+      className="content-container"
+    >
+      <h1
+        className="page-header__title"
+      >
+        Add an Expense
+      </h1>
+    </div>
+  </div>
+  <div
+    className="content-container"
+  >
+    <ExpenseForm
+      handleExpenseForm={[Function]}
+    />
+  </div>
 </div>
 `;

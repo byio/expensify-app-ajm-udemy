@@ -17,15 +17,25 @@ export class EditExpensePage extends React.Component {
   render () {
     return (
       <div>
-        {/* From Edit Expense Page. Editing expense with Id = {this.props.match.params.id}. */}
-        {console.log('this.props.match: ', this.props.match)}
-        <ExpenseForm
-          expense={this.props.expense}
-          handleExpenseForm={this.handleExpenseForm}
-        />
-        <button onClick={this.handleRemoveClick}>
-          Remove
-        </button>
+        <div className="page-header">
+          <div className="content-container">
+            <h1 className="page-header__title">Edit Expense</h1>
+          </div>
+        </div>
+        <div className="content-container">
+          {/* From Edit Expense Page. Editing expense with Id = {this.props.match.params.id}. */}
+          {/* {console.log('this.props.match: ', this.props.match)} */}
+          <ExpenseForm
+            expense={this.props.expense}
+            handleExpenseForm={this.handleExpenseForm}
+          />
+          <button
+            className="button button--secondary"
+            onClick={this.handleRemoveClick}
+          >
+            Remove Expense
+          </button>
+        </div>
       </div>
     );
   }
